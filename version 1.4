@@ -29,3 +29,9 @@ async def full_data(message:types.Message):
     await message.answer(f'Zayavka qabul qilindi!\n{total_message}', reply_markup=keyboard)
     await bot.send_message(channel,total_message)
     del user_data[user_id]
+
+
+
+async def main():
+    await dp.start_polling(bot)
+asyncio.run(main())
