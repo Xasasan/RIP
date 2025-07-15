@@ -1,0 +1,31 @@
+
+async def check_code(message:types.Message):
+    print(4,user_data)
+
+    user_id = message.from_user.id
+    user_code = message.text
+    code = user_data[user_id]['code']
+    if user_code == str(code):
+        await message.answer(f"Togri tasdiqlandi!")
+        user_data[user_id]['status'] = 'verified'
+        await ask_location(message)
+
+
+
+
+async def full_data(message:types.Message):
+    user_id = message.from_user.id
+    age = message.text
+    user_data[user_id]['age'] = age
+    total_message = (f"Ismingiz: {user_data[user_id]['name']}\n"
+                     f"Telefon raqamingiz: {user_data[user_id]['phone']}\n"
+                     f"Yoshingiz: {user_data[user_id]['age']}")
+    print(7, user_data)
+    name = user_data[user_id]['name']
+    phone = user_data[user_id]['phone']
+    save_db(user_id, name, phone, age)
+    button = [[types.KeyboardButton(text='Zayavka qoldirish')]]
+    keyboard = types.ReplyKeyboardMarkup(keyboard=button, resize_keyboard=True, one_time_keyboard=True)
+    await message.answer(f'Zayavka qabul qilindi!\n{total_message}', reply_markup=keyboard)
+    await bot.send_message(channel,total_message)
+    del user_data[user_id]
