@@ -35,3 +35,15 @@ async def full_data(message:types.Message):
 async def main():
     await dp.start_polling(bot)
 asyncio.run(main())
+
+
+
+
+async def starts(message:types.Message):
+    user_id = message.from_user.id
+    user_data[user_id] = {}
+    caption = f'Assalomu alaykum!\n'\
+              f'Iltimos ism kiriting'
+    photo = types.FSInputFile("images/uzum_sup.jpg")
+    await message.answer_photo(photo=photo, caption=caption)
+    print(1,user_data)
